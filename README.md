@@ -1,59 +1,49 @@
-# CORTEX 2026 | IEEE EMBS BMSIT
+# CORTEX Event Command Center - Operator's Guide
 
-**CORTEX** is an ultra-premium, high-performance event command center designed for live round management and real-time visualization. Built with a cinematic "Abyss-Black" aesthetic and an integrated 3D neural network, it provides a centralized hub for timers, stages, and automated AI voice coordination.
-
----
-
-## 🚀 One-Click Deployment (Vercel)
-1. Import this repository into **Vercel**.
-2. Select **Vite** as the framework preset.
-3. Use `npm run build` for the Build Command and `dist` for the Output Directory.
-4. Deploy.
+This dashboard is for running the live CORTEX event. Here is exactly how to use it.
 
 ---
 
-## 🎮 Operational Manual
-
-### **Keyboard Control System**
-The dashboard is designed for high-stakes environments where mouse clicks are too slow. Use the following hardware triggers:
-
-| Key Trigger | Action |
-| :--- | :--- |
-| `SPACE` | **Play / Pause** current timer |
-| `RIGHT ARROW` | **Skip** to the next event stage |
-| `LEFT ARROW` | **Revert** to the previous event stage |
-| `SHIFT + R` | **Hard Reset** (Wipes all round progress) |
-| `ESC` | Close any open HUD modals |
-
-### **Automated AI Voice System**
-The CORTEX AI voice automatically coordinates the following intervals:
-- **Round Start**: Announcements of stage label and name.
-- **5-Minute Warning**: "wrap up" notification.
-- **1-Minute Alert**: Final conclusion warning.
-- **Cycle Completion**: Automated stage transition audio.
-
-### **Custom Broadcast Scheduling**
-In the **CUSTOM BROADCAST** panel (Right HUD):
-1. **Manual Trigger**: Type text and click `SPEAK NOW` for an immediate broadcast.
-2. **Scheduled Trigger**: Type text, enter a target minute (e.g., `15`), and click `SCHEDULE`. The AI will automatically broadcast the message when the timer hits exactly that minute.
+### 🚀 1. How to Start the Event
+- **Open the site**: Access the URL provided by Vercel.
+- **Begin Round 1**: Click the large **START SESSION** button on the right sidebar. 
+- **AI Voice**: The AI will automatically welcome participants and start the countdown.
 
 ---
 
-## 🛠 Tech Stack
-- **Core**: React 19 + Vite (High-speed rendering)
-- **Engine**: Three.js (3D Synaptic Mesh 3.0)
-- **State**: Zustand (Atomic timer management)
-- **Animation**: Framer Motion + GSAP (Cinematic UI flow)
-- **Voice**: Web Speech API (Neural Broadcast System)
+### ⏱️ 2. Controlling the Clock
+- **Pause/Resume**: Press the **SPACEBAR** or click the Pause/Resume buttons.
+- **Change Time On-the-Fly**: If you need to manually set the timer:
+  1. Type the number of minutes in the small **MIN** box (e.g., `15`).
+  2. Click **SET TIME**. The clock will immediately update.
+- **Skip Rounds**: Use the **NEXT** or **PREV** buttons (or Arrow Keys) to switch between Quiz, PPT, Pitching, etc.
 
 ---
 
-## 📡 Diagnostic Nodes
-The system uses a triple-layered z-index architecture:
-- **Base Layer**: Three.js Neural Mesh (Absolute Black background)
-- **Logic Layer**: Central HUD (Timer, Stages, Round Preview)
-- **Control Layer**: Sidebars (Timeline, Voice Settings, Custom Queue)
+### 🎙️ 3. Using the AI Voice (Announcements)
+The system speaks **automatically** at these times:
+- **Start**: "Round has started. Good luck."
+- **5:00 Left**: "Only 5 minutes remaining. Wrap up."
+- **1:00 Left**: "One minute remaining. Please conclude."
+- **0:00**: "Round completed."
+
+**To make a Custom Announcement:**
+1. Type your message in the **CUSTOM BROADCAST** box.
+2. Click **SPEAK NOW** to say it instantly.
+3. **To Schedule**: Enter a message and a minute (e.g., `10`), then click **SCHEDULE**. The AI will say it automatically when the timer hits 10:00.
 
 ---
 
-**CORTEX v2.0 · IEEE EMBS BMSIT · MISSION READY.**
+### ⌨️ 4. Keyboard Shortcuts (For Speed)
+- **Space**: Play/Pause
+- **Right Arrow**: Next Round
+- **Left Arrow**: Previous Round
+- **Shift + R**: Reset everything back to the start.
+
+---
+
+### 🌑 5. Visuals
+- The **3D Neural Mesh** in the background reacts to your mouse.
+- To enter **Full Screen Mode**, click the button at the bottom right.
+
+**CORTEX v2.0 · IEEE EMBS BMSIT · Ready for live operation.**
