@@ -7,7 +7,7 @@ export default function Header({ time }) {
   const round = ROUNDS[currentRound];
 
   return (
-    <header style={{
+    <header className="header-container" style={{
       position: 'relative',
       zIndex: 20,
       display: 'flex',
@@ -70,26 +70,21 @@ export default function Header({ time }) {
             fontWeight: 800,
             letterSpacing: '0.25em',
             background: 'linear-gradient(90deg, var(--cyan), #fff, var(--violet))',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            backgroundClip: 'text',
-            lineHeight: 1,
+        <div className="header-title">
+          <h1 style={{
+            fontSize: '1.2rem', margin: 0, fontWeight: 800,
+            letterSpacing: '0.15em', fontFamily: 'var(--font-hud)',
+            background: 'linear-gradient(to right, #fff, var(--cyan))',
+            WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
           }}>
             CORTEX
-          </div>
+          </h1>
           <div style={{
-            fontSize: '0.75rem',
-            fontWeight: 600,
-            background: 'linear-gradient(90deg, #fff, var(--cyan))',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            backgroundClip: 'text',
-            fontFamily: 'var(--font-hud)',
-            letterSpacing: '0.12em',
-            textTransform: 'uppercase',
-            marginTop: 4,
+            fontSize: '0.52rem', color: 'var(--cyan)',
+            fontFamily: 'var(--font-mono)', letterSpacing: '0.2em',
+            marginTop: -2, opacity: 0.8
           }}>
-            IEEE EMBS BMSIT <span style={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.6rem', marginLeft: 4 }}>— 2026</span>
+            IEEE EMBS BMSIT - 2026
           </div>
         </div>
       </div>
@@ -98,7 +93,7 @@ export default function Header({ time }) {
       <div style={{ flex: 1 }} />
 
       {/* Right — HUD stats */}
-      <div style={{ display: 'flex', gap: 20, alignItems: 'center' }}>
+      <div className="header-stats" style={{ display: 'flex', gap: 20, alignItems: 'center' }}>
         <HUDPill label="ACTIVE ROUND" value={round.shortName} color={round.color} />
         <HUDPill label="SESSION" value={`${currentRound + 1} / ${ROUNDS.length}`} color="var(--violet)" />
 

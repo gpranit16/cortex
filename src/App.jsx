@@ -84,19 +84,23 @@ function App() {
             <Header time={time} />
 
             {/* ── Main 3-column layout ── */}
-            <main style={{
-              flex: 1, display: 'flex', gap: 12,
-              padding: '12px 16px',
-              overflow: 'hidden', position: 'relative', zIndex: 1,
-              minHeight: 0,
-              background: 'transparent',
-            }}>
+            <main 
+              className="main-layout"
+              style={{
+                flex: 1, display: 'flex', gap: 12,
+                padding: '12px 16px',
+                overflow: 'hidden', position: 'relative', zIndex: 1,
+                minHeight: 0,
+                background: 'transparent',
+              }}
+            >
 
               {/* LEFT — Timeline */}
               <motion.div
                 initial={{ x: -50, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
                 transition={{ duration: 0.65, delay: 0.1, ease: [0.4,0,0.2,1] }}
+                className="sidebar-left"
                 style={{ width: 238, flexShrink: 0, minWidth: 200 }}
               >
                 <EventTimeline />
@@ -107,6 +111,7 @@ function App() {
                 initial={{ y: 30, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.65, delay: 0.15, ease: [0.4,0,0.2,1] }}
+                className="center-display-container"
                 style={{ flex: 1, minWidth: 0, position: 'relative' }}
               >
                 <div style={{
@@ -154,6 +159,7 @@ function App() {
                 initial={{ x: 50, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
                 transition={{ duration: 0.65, delay: 0.1, ease: [0.4,0,0.2,1] }}
+                className="sidebar-right"
                 style={{
                   flexShrink: 0,
                   overflowY: 'auto', overflowX: 'hidden',
