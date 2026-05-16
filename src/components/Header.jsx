@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { Brain } from 'lucide-react';
 import useEventStore, { ROUNDS } from '../store/eventStore';
 
 /* ── Top Header / HUD Bar ────────────────────────────────────── */
