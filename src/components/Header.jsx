@@ -20,56 +20,29 @@ export default function Header({ time }) {
       flexShrink: 0,
     }}>
       {/* Left — Logo */}
+      {/* Left — Logo & Title */}
       <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
         <div style={{ position: 'relative' }}>
           <motion.div
             animate={{ rotate: 360 }}
             transition={{ repeat: Infinity, duration: 14, ease: 'linear' }}
             style={{
-              width: 38,
-              height: 38,
-              borderRadius: '50%',
+              width: 38, height: 38, borderRadius: '50%',
               border: '1.5px solid rgba(0,229,255,0.5)',
-              borderTopColor: 'transparent',
-              borderRightColor: 'transparent',
-              position: 'absolute',
-              inset: -2,
-            }}
-          />
-          <motion.div
-            animate={{ rotate: -360 }}
-            transition={{ repeat: Infinity, duration: 9, ease: 'linear' }}
-            style={{
-              width: 34,
-              height: 34,
-              borderRadius: '50%',
-              border: '1px solid rgba(139,92,246,0.4)',
-              borderBottomColor: 'transparent',
-              borderLeftColor: 'transparent',
-              position: 'absolute',
-              inset: 0,
+              borderTopColor: 'transparent', borderRightColor: 'transparent',
+              position: 'absolute', inset: -2,
             }}
           />
           <div style={{
-            width: 34, height: 34,
-            borderRadius: '50%',
-            background: 'linear-gradient(135deg, rgba(0,229,255,0.15), rgba(139,92,246,0.1))',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            fontSize: '1rem',
+            width: 38, height: 38, borderRadius: 10,
+            background: 'linear-gradient(135deg, var(--cyan), var(--violet))',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            boxShadow: '0 0 20px rgba(0,229,255,0.4)',
           }}>
-            🧠
+            <Brain size={22} color="#fff" />
           </div>
         </div>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-          <div style={{
-            fontSize: '1.4rem',
-            fontFamily: 'var(--font-hud)',
-            fontWeight: 800,
-            letterSpacing: '0.25em',
-            background: 'linear-gradient(90deg, var(--cyan), #fff, var(--violet))',
         <div className="header-title">
           <h1 style={{
             fontSize: '1.2rem', margin: 0, fontWeight: 800,
