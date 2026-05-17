@@ -118,9 +118,9 @@ export default function CenterDisplay() {
       </AnimatePresence>
 
       {/* ── Timer + Brain row ────────────────────────── */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: 24, width: '100%', justifyContent: 'center' }}>
+      <div className="timer-brain-row" style={{ display: 'flex', alignItems: 'center', gap: 24, width: '100%', justifyContent: 'center' }}>
         {/* Left — Brain + time info */}
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10 }}>
+        <div className="meta-stats-column" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10 }}>
           <AnimatePresence mode="wait">
             <motion.div key={`brain-${currentRound}`}
               initial={{ scale: 0.8, opacity: 0, x: -20 }}
@@ -152,6 +152,7 @@ export default function CenterDisplay() {
             animate={{ scale: 1, opacity: 1, rotateY: 0 }}
             exit={{ scale: 0.75, opacity: 0, rotateY: 15 }}
             transition={{ duration: 0.55, ease: [0.4, 0, 0.2, 1] }}
+            className="circular-timer-wrapper"
             style={{ position: 'relative' }}
           >
             {/* Breathing outer glow */}
@@ -181,7 +182,7 @@ export default function CenterDisplay() {
         </AnimatePresence>
 
         {/* Right — Status + next round */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 10, alignItems: 'flex-start' }}>
+        <div className="status-column" style={{ display: 'flex', flexDirection: 'column', gap: 10, alignItems: 'flex-start' }}>
           {/* Status card */}
           <div style={{
             padding: '10px 14px', borderRadius: 10,
@@ -240,7 +241,7 @@ export default function CenterDisplay() {
       </div>
 
       {/* ── EEG Waveform ────────────────────────────── */}
-      <div style={{ width: '100%', maxWidth: 520 }}>
+      <div className="eeg-waveform-container" style={{ width: '100%', maxWidth: 520 }}>
         <div style={{
           display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 6,
         }}>
@@ -270,6 +271,7 @@ export default function CenterDisplay() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ delay: 0.2, duration: 0.4 }}
+            className="next-round-preview-container"
             style={{
               display: 'flex', alignItems: 'center', gap: 12, padding: '10px 18px',
               borderRadius: 10,

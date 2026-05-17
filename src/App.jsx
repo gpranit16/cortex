@@ -101,7 +101,7 @@ function App() {
                 animate={{ x: 0, opacity: 1 }}
                 transition={{ duration: 0.65, delay: 0.1, ease: [0.4,0,0.2,1] }}
                 className="sidebar-left"
-                style={{ width: 238, flexShrink: 0, minWidth: 200 }}
+                style={{ width: 'min(100%, 238px)', flexShrink: 0 }}
               >
                 <EventTimeline />
               </motion.div>
@@ -161,6 +161,7 @@ function App() {
                 transition={{ duration: 0.65, delay: 0.1, ease: [0.4,0,0.2,1] }}
                 className="sidebar-right"
                 style={{
+                  width: 'min(100%, 250px)',
                   flexShrink: 0,
                   overflowY: 'auto', overflowX: 'hidden',
                 }}

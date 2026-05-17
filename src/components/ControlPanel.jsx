@@ -53,9 +53,9 @@ export default function ControlPanel() {
   };
 
   return (
-    <div style={{
+    <div className="control-panel-container" style={{
       display: 'flex', flexDirection: 'column', gap: 10,
-      width: 250, flexShrink: 0,
+      width: '100%',
       overflowY: 'auto', overflowX: 'hidden',
       paddingBottom: 4,
       scrollbarWidth: 'thin',
@@ -474,6 +474,7 @@ function DangerBtn({ label, onClick }) {
         background: 'rgba(255,77,109,0.08)',
         color: '#FF4D6D', fontSize: '0.59rem', fontFamily: 'var(--font-hud)',
         letterSpacing: '0.08em', cursor: 'pointer', transition: 'all 0.2s',
+        width: '100%',
       }}>
       {label}
     </motion.button>

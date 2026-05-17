@@ -137,8 +137,8 @@ export default function CircularTimer() {
   };
 
   return (
-    <div style={{ position: 'relative', width: 320, height: 320 }}>
-      <canvas ref={canvasRef} style={{ display: 'block' }} />
+    <div className="circular-timer-container" style={{ position: 'relative', width: 'min(80vw, 320px)', height: 'min(80vw, 320px)', margin: '0 auto' }}>
+      <canvas ref={canvasRef} style={{ display: 'block', width: '100%', height: '100%' }} />
 
       {/* Center overlay */}
       <div style={{
@@ -148,10 +148,10 @@ export default function CircularTimer() {
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        gap: 4,
+        gap: '2%',
       }}>
         <div style={{
-          fontSize: '0.65rem',
+          fontSize: 'clamp(0.5rem, 2vw, 0.65rem)',
           letterSpacing: '0.25em',
           color: 'var(--text-secondary)',
           fontFamily: 'var(--font-hud)',
@@ -163,7 +163,7 @@ export default function CircularTimer() {
         <div
           className="glow-cyan"
           style={{
-            fontSize: timeLeft >= 3600 ? '2.4rem' : '3.2rem',
+            fontSize: timeLeft >= 3600 ? 'clamp(1.8rem, 7vw, 2.4rem)' : 'clamp(2.2rem, 9vw, 3.2rem)',
             fontFamily: 'var(--font-hud)',
             fontWeight: 700,
             color: round.color,
@@ -175,27 +175,28 @@ export default function CircularTimer() {
           {formatTime(timeLeft)}
         </div>
         <div style={{
-          fontSize: '0.6rem',
+          fontSize: 'clamp(0.48rem, 1.8vw, 0.6rem)',
           letterSpacing: '0.15em',
           fontFamily: 'var(--font-hud)',
           color: 'var(--text-secondary)',
           textTransform: 'uppercase',
-          marginTop: 2,
+          marginTop: '1%',
         }}>
           {isRunning ? '● LIVE' : isPaused ? '⏸ PAUSED' : '■ READY'}
         </div>
         <div style={{
-          width: 48,
-          height: 2,
+          width: '20%',
+          height: 1.5,
           background: `linear-gradient(90deg, transparent, ${round.color}, transparent)`,
-          marginTop: 6,
+          marginTop: '2%',
           borderRadius: 1,
         }} />
         <div style={{
-          fontSize: '0.58rem',
+          fontSize: 'clamp(0.45rem, 1.6vw, 0.58rem)',
           color: 'var(--text-dim)',
           fontFamily: 'var(--font-mono)',
           letterSpacing: '0.08em',
+          marginTop: '1%',
         }}>
           {Math.round((1 - timeLeft / round.duration) * 100)}% ELAPSED
         </div>

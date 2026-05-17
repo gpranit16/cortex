@@ -365,8 +365,243 @@ body {
   opacity: 0.4;
 }
 
-/* ── Responsive layout ────────────────────────────────────────── */
-@media (max-width: 900px) {
-  body { cursor: default; }
+/* ── Box sizing and global limits ── */
+*, *::before, *::after {
+  box-sizing: border-box !important;
+  max-width: 100% !important;
 }
 
+html, body, #root {
+  overflow-x: hidden !important;
+  width: 100% !important;
+  min-height: 100vh !important;
+  height: auto !important;
+}
+
+/* ── Mobile default layout (Mobile First) ── */
+#root > div {
+  height: auto !important;
+  min-height: 100vh !important;
+  overflow: visible !important;
+  display: flex !important;
+  flex-direction: column !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+.main-layout {
+  flex-direction: column !important;
+  height: auto !important;
+  overflow: visible !important;
+  padding: 12px 10px !important;
+  gap: 16px !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  display: flex !important;
+}
+
+.sidebar-left, .sidebar-right, .center-display-container {
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  flex: none !important;
+  height: auto !important;
+  transform: none !important;
+  opacity: 1 !important;
+  overflow: visible !important;
+}
+
+.sidebar-left > div, .sidebar-right > div, .center-display-container > div {
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  height: auto !important;
+  min-height: auto !important;
+}
+
+/* Buttons and Inputs responsive stretching on mobile */
+.control-panel-container button,
+.control-panel-container textarea,
+.control-panel-container input {
+  width: 100% !important;
+}
+
+.timer-brain-row {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: 16px !important;
+  width: 100% !important;
+}
+
+.meta-stats-column, .status-column {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+  gap: 14px !important;
+  width: 100% !important;
+}
+
+.meta-stats-column > div, .status-column > div {
+  text-align: center !important;
+  align-items: center !important;
+}
+
+.circular-timer-wrapper {
+  margin: 0 auto !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  width: min(80vw, 320px) !important;
+  height: min(80vw, 320px) !important;
+}
+
+.eeg-waveform-container {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+.next-round-preview-container {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+.header-container {
+  padding: 10px 14px !important;
+  flex-wrap: wrap !important;
+  gap: 8px !important;
+  height: auto !important;
+}
+
+.header-title h1 {
+  font-size: 0.95rem !important;
+}
+
+.header-stats {
+  display: none !important;
+}
+
+footer {
+  flex-direction: column !important;
+  gap: 8px !important;
+  text-align: center !important;
+  padding: 12px 10px !important;
+  width: 100% !important;
+}
+
+footer > div {
+  font-size: 0.45rem !important;
+}
+
+/* ── Desktop Layering (min-width: 1025px) ── */
+@media (min-width: 1025px) {
+  html, body, #root {
+    overflow: hidden !important;
+    height: 100vh !important;
+  }
+
+  #root > div {
+    height: 100vh !important;
+    overflow: hidden !important;
+  }
+
+  .main-layout {
+    flex-direction: row !important;
+    height: 100% !important;
+    overflow: hidden !important;
+    padding: 12px 16px !important;
+    gap: 12px !important;
+  }
+
+  .sidebar-left {
+    width: 238px !important;
+    max-width: 238px !important;
+    flex: 0 0 238px !important;
+    height: 100% !important;
+    overflow-y: auto !important;
+  }
+
+  .sidebar-right {
+    width: 250px !important;
+    max-width: 250px !important;
+    flex: 0 0 250px !important;
+    height: 100% !important;
+    overflow-y: auto !important;
+  }
+
+  .center-display-container {
+    flex: 1 !important;
+    height: 100% !important;
+    overflow: hidden !important;
+  }
+
+  .sidebar-left > div {
+    height: 100% !important;
+    min-height: 0 !important;
+  }
+
+  .sidebar-right > div {
+    height: auto !important;
+    min-height: 0 !important;
+  }
+
+  .timer-brain-row {
+    flex-direction: row !important;
+    gap: 24px !important;
+  }
+
+  .meta-stats-column, .status-column {
+    flex-direction: column !important;
+    flex-wrap: nowrap !important;
+    width: auto !important;
+    gap: 10px !important;
+  }
+
+  .meta-stats-column > div, .status-column > div {
+    text-align: left !important;
+    align-items: flex-start !important;
+  }
+
+  .circular-timer-wrapper {
+    width: 320px !important;
+    height: 320px !important;
+  }
+
+  .header-container {
+    padding: 14px 28px !important;
+    flex-wrap: nowrap !important;
+    height: auto !important;
+  }
+
+  .header-title h1 {
+    font-size: clamp(1rem, 2vw, 1.4rem) !important;
+  }
+
+  .header-stats {
+    display: flex !important;
+  }
+
+  footer {
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    padding: 7px 22px !important;
+  }
+}
+
+/* ── Intermediate Tablet Scaling (768px - 1024px) ── */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .timer-brain-row {
+    flex-direction: row !important;
+    gap: 24px !important;
+  }
+  
+  .meta-stats-column, .status-column {
+    flex-direction: column !important;
+    width: auto !important;
+  }
+  
+  .glass-panel-cyan, .glass-panel-violet {
+    padding: 20px !important;
+  }
+}
