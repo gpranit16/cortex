@@ -1,12 +1,12 @@
 import { useEffect, useRef } from 'react';
-import useEventStore, { ROUNDS } from '../store/eventStore';
+import useEventStore from '../store/eventStore';
 
-/* ── Animated waveform bar reacting to timer ──────────────────── */
-export default function Waveform({ barCount = 48, height = 56 }) {
+/* ── Cinematic EEG Neural Waveform Visualization (Futuristic Lab style) ── */
+export default function Waveform({ height = 90 }) {
   const canvasRef = useRef(null);
   const animRef   = useRef(null);
   const frameRef  = useRef(0);
-  const { isRunning, currentRound } = useEventStore();
+  const { isRunning } = useEventStore();
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -24,58 +24,88 @@ export default function Waveform({ barCount = 48, height = 56 }) {
 
     let W = setupCanvas();
 
-    const colorSets = [
-      ['#00E5FF', '#3CF2C2'],
-      ['#8B5CF6', '#00E5FF'],
-      ['#3CF2C2', '#8B5CF6'],
-      ['#F59E0B', '#FF4D6D'],
-      ['#FF4D6D', '#F59E0B'],
-    ];
-    const [c1, c2] = colorSets[currentRound % colorSets.length];
-
     const draw = () => {
-      const frame  = frameRef.current;
-      const speed  = isRunning ? 0.065 : 0.018;
-      const logW   = canvas.getBoundingClientRect().width;
+      const frame = frameRef.current;
+      const speed = isRunning ? 0.045 : 0.012;
+      const logW  = canvas.getBoundingClientRect().width;
       if (logW !== W) { W = setupCanvas(); }
 
       ctx.clearRect(0, 0, W, height);
 
-      const barW = W / barCount;
+      // ── Draw grid line reference overlays (Medical HUD background) ──
+      ctx.strokeStyle = 'rgba(0, 229, 255, 0.04)';
+      ctx.lineWidth = 1;
+      // Center line
+      ctx.beginPath();
+      ctx.moveTo(0, height / 2);
+      ctx.lineTo(W, height / 2);
+      ctx.stroke();
 
+      // Horizontal auxiliary grid lines
+      ctx.beginPath();
+      ctx.moveTo(0, height * 0.15);
+      ctx.lineTo(W, height * 0.15);
+      ctx.moveTo(0, height * 0.85);
+      ctx.lineTo(W, height * 0.85);
+      ctx.stroke();
+
+      // ── 1. Elegant Continuous Flowing EEG Brainwave Curve (Baseline) ──
+      ctx.save();
+      ctx.beginPath();
+      ctx.strokeStyle = `rgba(0, 229, 255, ${isRunning ? 0.7 : 0.4})`;
+      ctx.lineWidth = 1.6;
+      ctx.shadowBlur = isRunning ? 14 : 6;
+      ctx.shadowColor = '#00E5FF';
+
+      for (let x = 0; x < W; x += 1.5) {
+        const t = frame * speed;
+        // Bio-electrical neural wave harmonics
+        const alpha = Math.sin(t + x * 0.022) * 0.34;
+        const beta  = Math.sin(t * 2.3 + x * 0.045) * 0.16;
+        const delta = Math.cos(t * 0.65 + x * 0.008) * 0.22;
+        const theta = Math.sin(t * 3.8 + x * 0.09) * 0.04; // minor electrical jitter
+
+        const amp = isRunning ? (alpha + beta + delta + theta) : (alpha + beta + delta) * 0.35;
+        const y = height / 2 + amp * height * 0.65;
+
+        if (x === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+      ctx.restore();
+
+      // ── 2. High-Density Ultra-Thin Holographic Pulse Tick Bars ──
+      const barCount = 76;
+      const barW = W / barCount;
+      ctx.save();
+      
       for (let i = 0; i < barCount; i++) {
         const t   = frame * speed;
-        const f1  = Math.sin(t + i * 0.38) * 0.45;
-        const f2  = Math.sin(t * 1.9 + i * 0.22) * 0.28;
-        const f3  = Math.cos(t * 0.6 + i * 0.7) * 0.15;
-        const f4  = Math.sin(t * 3.1 + i * 1.1) * 0.08; // high-freq micro-jitter
-        const raw = Math.abs(f1 + f2 + f3 + f4);
-        const amp = isRunning ? raw * 0.88 + 0.06 : raw * 0.2 + 0.03;
-        const barH   = amp * height;
-        const x      = i * barW + barW * 0.18;
-        const y      = (height - barH) / 2;
-        const alpha  = isRunning ? 0.55 + raw * 0.45 : 0.28;
+        const f1  = Math.sin(t * 0.8 + i * 0.36) * 0.35;
+        const f2  = Math.sin(t * 2.1 + i * 0.24) * 0.20;
+        const f3  = Math.cos(t * 0.5 + i * 0.72) * 0.15;
+        
+        const raw = Math.abs(f1 + f2 + f3);
+        const amp = isRunning ? Math.min(1, raw * 1.15 + 0.06) : raw * 0.42 + 0.08;
+        const barH = amp * height * 0.75;
+        const x = i * barW + (barW - 1.5) / 2;
+        const y = (height - barH) / 2;
 
-        // Gradient per bar
+        // Custom gradient for each thin ticker line to look holographic
         const grad = ctx.createLinearGradient(x, y, x, y + barH);
-        grad.addColorStop(0, `${c1}${Math.round(alpha * 255).toString(16).padStart(2,'0')}`);
-        grad.addColorStop(1, `${c2}${Math.round(alpha * 0.5 * 255).toString(16).padStart(2,'0')}`);
+        grad.addColorStop(0, 'rgba(0, 229, 255, 0.85)');
+        grad.addColorStop(0.5, 'rgba(0, 229, 255, 0.4)');
+        grad.addColorStop(1, 'rgba(139, 92, 246, 0.15)');
 
-        ctx.shadowBlur  = isRunning ? 6 + raw * 8 : 2;
-        ctx.shadowColor = c1;
-        ctx.fillStyle   = grad;
+        ctx.shadowBlur = isRunning ? 8 : 4;
+        ctx.shadowColor = '#00E5FF';
+        ctx.fillStyle = grad;
 
-        const rr = Math.min(barW * 0.35, barH / 2, 3);
-        if (ctx.roundRect) {
-          ctx.beginPath();
-          ctx.roundRect(x, y, barW * 0.64, barH, rr);
-          ctx.fill();
-        } else {
-          ctx.fillRect(x, y, barW * 0.64, barH);
-        }
+        // Draw super thin elegant clinical pulse bars (1.5px wide)
+        ctx.fillRect(x, y, 1.5, barH);
       }
+      ctx.restore();
 
-      ctx.shadowBlur = 0;
       frameRef.current++;
       animRef.current = requestAnimationFrame(draw);
     };
@@ -89,7 +119,7 @@ export default function Waveform({ barCount = 48, height = 56 }) {
       cancelAnimationFrame(animRef.current);
       ro.disconnect();
     };
-  }, [isRunning, currentRound, barCount, height]);
+  }, [isRunning, height]);
 
   return (
     <canvas

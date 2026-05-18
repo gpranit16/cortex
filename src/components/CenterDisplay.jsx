@@ -48,7 +48,7 @@ function BrainPulse({ color }) {
 /* ── Center Panel: Main Countdown Display ─────────────────────── */
 export default function CenterDisplay() {
   const {
-    currentRound, timeLeft, isRunning, isPaused, isCompleted,
+    currentRound, timeLeft, isRunning, isPaused, isCompleted, customTitle
   } = useEventStore();
 
   const round     = ROUNDS[currentRound];
@@ -72,77 +72,45 @@ export default function CenterDisplay() {
           transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
           style={{ textAlign: 'center', width: '100%' }}
         >
-          {/* Top badge */}
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10, marginBottom: 8 }}>
+          {/* Main Branding Section */}
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: 0, position: 'relative' }}>
+            {/* Subtle tech grid background behind branding */}
             <div style={{
-              height: 1, width: 50,
-              background: `linear-gradient(90deg, transparent, ${round.color}60)`,
+              position: 'absolute', inset: -30,
+              background: 'radial-gradient(ellipse at center, rgba(0,229,255,0.06) 0%, transparent 60%)',
+              zIndex: -1, pointerEvents: 'none',
+              borderTop: '1px solid rgba(0,229,255,0.1)',
+              borderBottom: '1px solid rgba(0,229,255,0.1)',
             }} />
-            <div style={{
-              fontSize: '0.58rem', letterSpacing: '0.35em',
-              color: round.color, fontFamily: 'var(--font-hud)',
-              textTransform: 'uppercase', opacity: 0.9,
-              textShadow: `0 0 10px ${round.color}`,
-              display: 'flex', alignItems: 'center', gap: 6
-            }}>
-              {(() => {
-                const Icon = ICON_MAP[round.icon] || Circle;
-                return <Icon size={12} strokeWidth={2.5} />;
-              })()}
-              {round.label}
+            
+            {/* IEEE Top Level Branding */}
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6, marginBottom: 12 }}>
+              <span style={{ fontSize: '1.45rem', color: '#ffffff', fontFamily: 'var(--font-hud)', letterSpacing: '0.28em', fontWeight: 700, textShadow: '0 0 10px rgba(255,255,255,0.2)' }}>IEEE EMBS BMSIT</span>
+              <span style={{ fontSize: '0.85rem', color: 'var(--cyan)', fontFamily: 'var(--font-hud)', letterSpacing: '0.45em', textTransform: 'uppercase', fontWeight: 600, opacity: 0.95, textShadow: '0 0 8px rgba(0,229,255,0.4)' }}>PRESENTS</span>
             </div>
-            <div style={{
-              height: 1, width: 50,
-              background: `linear-gradient(90deg, ${round.color}60, transparent)`,
-            }} />
-          </div>
-
-          {/* Round name */}
-          <h1 style={{
-            fontSize: 'clamp(1.5rem, 2.8vw, 2.2rem)',
-            fontFamily: 'var(--font-hud)', fontWeight: 800,
-            letterSpacing: '0.05em', textTransform: 'uppercase',
-            background: `linear-gradient(135deg, ${round.color} 0%, #fff 50%, var(--violet) 100%)`,
-            WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
-            lineHeight: 1.1, marginBottom: 4,
-          }}>
-            {round.name}
-          </h1>
-          <div style={{
-            fontSize: '0.68rem', color: 'var(--text-secondary)',
-            fontFamily: 'var(--font-body)', letterSpacing: '0.06em',
-          }}>
-            {round.description}
+            
+            {/* Hero Title */}
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+              <h1 style={{
+                fontSize: 'clamp(2.8rem, 6vw, 4.2rem)',
+                fontFamily: 'var(--font-hud)', fontWeight: 900,
+                letterSpacing: '0.25em', textTransform: 'uppercase',
+                background: 'linear-gradient(to right, #ffffff 0%, #00E5FF 100%)',
+                WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
+                lineHeight: 1.1, margin: 0,
+                filter: 'drop-shadow(0 0 20px rgba(0,229,255,0.5))'
+              }}>
+                CORTEX
+              </h1>
+            </div>
           </div>
         </motion.div>
       </AnimatePresence>
 
       {/* ── Timer + Brain row ────────────────────────── */}
-      <div className="timer-brain-row" style={{ display: 'flex', alignItems: 'center', gap: 24, width: '100%', justifyContent: 'center' }}>
-        {/* Left — Brain + time info */}
-        <div className="meta-stats-column" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10 }}>
-          <AnimatePresence mode="wait">
-            <motion.div key={`brain-${currentRound}`}
-              initial={{ scale: 0.8, opacity: 0, x: -20 }}
-              animate={{ scale: 1, opacity: 1, x: 0 }}
-              exit={{ scale: 0.8, opacity: 0 }}
-              transition={{ duration: 0.5 }}
-            >
-              <BrainPulse color={round.color} />
-            </motion.div>
-          </AnimatePresence>
-
-          {/* Time meta */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 8, alignItems: 'flex-start' }}>
-            <HUDStat label="START" value={round.startTime} color={round.color} />
-            <HUDStat label="END" value={round.endTime} color="var(--violet)" />
-            <HUDStat
-              label="DURATION"
-              value={round.duration >= 3600 ? `${round.duration / 3600}h 0m` : `${round.duration / 60} min`}
-              color="var(--mint)"
-            />
-          </div>
-        </div>
+      <div className="timer-brain-row" style={{ display: 'flex', alignItems: 'center', width: '100%', justifyContent: 'space-around', padding: '0', marginTop: '-2vh' }}>
+        {/* Left — Placeholder for center balance */}
+        <div style={{ flex: 1, maxWidth: 160 }} />
 
         {/* Center — Circular Timer */}
         <AnimatePresence mode="wait">
@@ -166,23 +134,12 @@ export default function CenterDisplay() {
               animate={{ opacity: isRunning ? [0.4, 0.95, 0.4] : 0.25, scale: isRunning ? [1, 1.05, 1] : 1 }}
               transition={{ repeat: Infinity, duration: 2.5, ease: 'easeInOut' }}
             />
-            {/* Second ring pulse */}
-            {isRunning && (
-              <motion.div style={{
-                position: 'absolute', inset: -5, borderRadius: '50%',
-                border: `1.5px solid ${round.color}`,
-                pointerEvents: 'none',
-              }}
-                animate={{ scale: [1, 1.25], opacity: [0.5, 0] }}
-                transition={{ repeat: Infinity, duration: 2, ease: 'easeOut' }}
-              />
-            )}
             <CircularTimer />
           </motion.div>
         </AnimatePresence>
 
         {/* Right — Status + next round */}
-        <div className="status-column" style={{ display: 'flex', flexDirection: 'column', gap: 10, alignItems: 'flex-start' }}>
+        <div className="status-column" style={{ display: 'flex', flexDirection: 'column', gap: 10, alignItems: 'flex-start', flex: 1, maxWidth: 160 }}>
           {/* Status card */}
           <div style={{
             padding: '10px 14px', borderRadius: 10,
@@ -241,7 +198,7 @@ export default function CenterDisplay() {
       </div>
 
       {/* ── EEG Waveform ────────────────────────────── */}
-      <div className="eeg-waveform-container" style={{ width: '100%', maxWidth: 520 }}>
+      <div className="eeg-waveform-container" style={{ width: '100%', maxWidth: '800px', marginTop: 'auto', marginBottom: '2vh' }}>
         <div style={{
           display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 6,
         }}>
@@ -259,7 +216,7 @@ export default function CenterDisplay() {
             </span>
           </div>
         </div>
-        <Waveform height={48} barCount={44} />
+        <Waveform height={90} barCount={26} />
       </div>
 
       {/* ── Next round preview ───────────────────────── */}

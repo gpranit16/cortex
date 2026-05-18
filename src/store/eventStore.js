@@ -3,64 +3,16 @@ import { create } from 'zustand';
 export const ROUNDS = [
   {
     id: 0,
-    name: 'Quiz Challenge',
-    shortName: 'QUIZ',
-    label: 'Round 1',
+    name: 'Main Event',
+    shortName: 'EVENT',
+    label: 'Session 1',
     icon: 'Brain',
     color: '#00E5FF',
     startTime: '10:00 AM',
-    endTime: '10:30 AM',
-    duration: 30 * 60,
-    description: 'Biomedical knowledge assessment',
-  },
-  {
-    id: 1,
-    name: 'PPT Presentation',
-    shortName: 'PPT',
-    label: 'Round 2',
-    icon: 'Presentation',
-    color: '#8B5CF6',
-    startTime: '10:45 AM',
-    endTime: '12:45 PM',
+    endTime: '12:00 PM',
     duration: 120 * 60,
-    description: 'Technical presentation & research showcase',
-  },
-  {
-    id: 2,
-    name: 'Refreshments Break',
-    shortName: 'BREAK',
-    label: 'Break',
-    icon: 'Coffee',
-    color: '#3CF2C2',
-    startTime: '1:00 PM',
-    endTime: '2:00 PM',
-    duration: 60 * 60,
-    description: 'Network & recharge',
-  },
-  {
-    id: 3,
-    name: 'Pitching Round',
-    shortName: 'PITCH',
-    label: 'Round 3',
-    icon: 'Target',
-    color: '#F59E0B',
-    startTime: '2:00 PM',
-    endTime: '3:00 PM',
-    duration: 60 * 60,
-    description: 'Final innovation pitch to judges',
-  },
-  {
-    id: 4,
-    name: 'Winner Announcement',
-    shortName: 'FINALE',
-    label: 'Finale',
-    icon: 'Trophy',
-    color: '#FF4D6D',
-    startTime: '3:00 PM',
-    endTime: '3:30 PM',
-    duration: 30 * 60,
-    description: 'Recognition ceremony & awards',
-  },
+    description: 'Main event timeline',
+  }
 ];
 
 const useEventStore = create((set, get) => ({
@@ -71,6 +23,10 @@ const useEventStore = create((set, get) => ({
   isCompleted: false,
   completedRounds: [],
   tickerRef: null,
+
+  // Custom UI Title
+  customTitle: '',
+  setCustomTitle: (title) => set({ customTitle: title }),
 
   // Voice settings
   voiceEnabled: true,

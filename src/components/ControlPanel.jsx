@@ -21,6 +21,7 @@ export default function ControlPanel() {
     voiceEnabled, voiceGender, voiceVolume,
     setVoiceEnabled, setVoiceGender, setVoiceVolume,
     announce, toggleFullscreen, isFullscreen, timeLeft,
+    customTitle, setCustomTitle
   } = useEventStore();
 
   const [testAnn, setTestAnn] = useState(false);
@@ -61,6 +62,33 @@ export default function ControlPanel() {
       scrollbarWidth: 'thin',
       scrollbarColor: 'rgba(0,229,255,0.2) transparent',
     }}>
+
+      {/* ── Custom Header Message ─────────────────────────── */}
+      <PanelCard color="var(--violet)" label="CUSTOM HEADER MESSAGE" icon="T">
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginTop: 12 }}>
+          <div style={{ position: 'relative' }}>
+            <input
+              id="custom-heading-input"
+              defaultValue={customTitle}
+              placeholder="Enter message for top header..."
+              style={{
+                width: '100%', background: 'rgba(255,255,255,0.03)',
+                border: '1px solid rgba(255,255,255,0.1)', borderRadius: 8,
+                padding: '8px 10px', color: '#fff', fontSize: '0.65rem',
+                fontFamily: 'var(--font-mono)', outline: 'none'
+              }}
+            />
+          </div>
+          <PrimaryBtn 
+            label="UPDATE HEADER MESSAGE" 
+            onClick={() => {
+              const el = document.getElementById('custom-heading-input');
+              if (el) setCustomTitle(el.value);
+            }}
+            bg="rgba(139,92,246,0.15)" textColor="var(--violet)" glow="rgba(139,92,246,0.2)"
+          />
+        </div>
+      </PanelCard>
 
       {/* ── Timer Controls ──────────────────────────── */}
       <PanelCard color="var(--violet)" label="TIMER CONTROLS" icon="⚡">
@@ -274,6 +302,7 @@ export default function ControlPanel() {
           </motion.button>
         </div>
       </PanelCard>
+
 
       {/* ── Custom Announcements ────────────────────── */}
       <PanelCard color="var(--cyan)" label="CUSTOM BROADCAST" icon={<Mic2 size={11} strokeWidth={2.5} />}>
